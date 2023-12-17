@@ -1,0 +1,34 @@
+version: '2'
+services:
+  erp-16-db:
+    image: postgres:15
+    user: root
+    environment:
+      - POSTGRES_USER=atcom
+      - POSTGRES_PASSWORD=atcom@2023      
+      - POSTGRES_DB=postgres
+    restart: always             # run as a service
+    volumes:
+        - ./postgresql:/var/lib/postgresql/data
+
+  erp-16:
+    image: odoo:16
+    user: root
+    depends_on:
+      - erp-16-db
+    ports:
+      - "16100:8069"
+      - "16200:8072" # live chat
+    tty: true
+    command: --
+    environment:
+      - HOST=erp-16-db
+      - USER=atcom
+      - PASSWORD=atcom16@2022
+    volumes:
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+      - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always             # run as a service

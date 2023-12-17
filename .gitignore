@@ -1,0 +1,16 @@
+# Odoo related
+postgresql/
+etc/odoo-server.log
+etc/addons/
+etc/sessions/
+etc/filestore/
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+# Local History for Visual Studio Code
+.history/
