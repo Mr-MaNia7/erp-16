@@ -1,6 +1,6 @@
 version: '2'
 services:
-  erp-16-db:
+  school-erp-db:
     image: postgres:15
     user: root
     environment:
@@ -11,24 +11,24 @@ services:
     volumes:
         - ./postgresql:/var/lib/postgresql/data
 
-  erp-16:
+  school-erp:
     image: odoo:16
     user: root
     depends_on:
-      - erp-16-db
+      - school-erp-db
     ports:
-      - "16100:8069"
-      - "16200:8072" # live chat
+      - "16101:8069"
+      - "16201:8072" # live chat
     tty: true
     command: --
     environment:
-      - HOST=erp-16-db
+      - HOST=school-erp-db
       - USER=atcom
-      - PASSWORD=atcom16@2022
+      - PASSWORD=atcom@2023
     volumes:
       #- /etc/timezone:/etc/timezone:ro
       #- /etc/localtime:/etc/localtime:ro
-      - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      # - ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always             # run as a service
