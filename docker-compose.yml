@@ -1,6 +1,6 @@
 version: '2'
 services:
-  erp-16-db:
+  atcom-hr-db:
     image: postgres:15
     user: root
     environment:
@@ -15,14 +15,14 @@ services:
     image: odoo:16
     user: root
     depends_on:
-      - erp-16-db
+      - atcom-hr-db
     ports:
-      - "16100:8069"
-      - "16200:8072" # live chat
+      - "16101:8069"
+      - "16201:8072" # live chat
     tty: true
     command: --
     environment:
-      - HOST=erp-16-db
+      - HOST=atcom-hr-db
       - USER=atcom
       - PASSWORD=atcom16@2022
     volumes:
