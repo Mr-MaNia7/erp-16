@@ -17,8 +17,8 @@ services:
     depends_on:
       - atcom-hr-db
     ports:
-      - "16101:8069"
-      - "16201:8072" # live chat
+      - "16102:8069"
+      - "16202:8072" # live chat
     tty: true
     command: --
     environment:
